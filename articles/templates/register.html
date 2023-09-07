@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block start %}
+<div class="container mt-5">
+  <form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h2>Add User</h2>
+    <hr>
+    {% if messages %}
+    <div class="alert alert-primary" role="alert">
+      {% for message in messages %}
+      {{ message }}
+      {% endfor %}
+    </div>
+    {% endif %}
+    <div class="mb-3">
+      <label for="first_name" class="form-label">First Name</label>
+      <input type="text" class="form-control" name="first_name" id="first_name" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+      <label for="last_name" class="form-label">Last Name</label>
+      <input type="text" class="form-control" name="last_name" id="last_name" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input type="text" class="form-control" name="username" id="username" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" name="password" id="password">
+    </div>
+    <div class="mb-3">
+      <label for="user_role" class="form-label">Select User Role</label>
+      <select class="form-select" id="user_role">
+        <option name="is_author">Author</option>
+        <option name="is_publisher">Publisher</option>
+      </select>
+    </div>
+    <p>Already have an account <a href="/login">Login</a></p>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+{% endblock %}
