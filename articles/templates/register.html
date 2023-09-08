@@ -21,6 +21,10 @@
       <input type="text" class="form-control" name="last_name" id="last_name" aria-describedby="emailHelp">
     </div>
     <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Email</label>
+      <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
       <label for="username" class="form-label">Username</label>
       <input type="text" class="form-control" name="username" id="username" aria-describedby="emailHelp">
     </div>
@@ -30,13 +34,13 @@
     </div>
     <div class="mb-3">
       <label for="user_role" class="form-label">Select User Role</label>
-      <select class="form-select" id="user_role">
-        <option name="is_author">Author</option>
-        <option name="is_publisher">Publisher</option>
+      <select class="form-select" id="user_role"name="user_role">
+        <option value="is_author">Author</option>
+        <option value="is_publisher">Publisher</option>
       </select>
     </div>
-    <p>Already have an account <a href="/login">Login</a></p>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <!-- <p>Already have an account <a href="/login">Login</a></p> -->
+    <button type="submit" class="btn btn-success">Submit</button>
   </form>
 </div>
 {% endblock %}

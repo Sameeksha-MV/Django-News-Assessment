@@ -23,13 +23,16 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', home, name="home"),
+    path('about-us/', about_us, name="about_us"),
+    path('contact-us/', contact_us, name="contact_us"),
     path('login/', login_page, name="login_page"),
     path('register/', register, name="register"),
     path('logout/', logout_page, name="logout_page"),
     path('add-article/', articles, name="articles"),
+    path('articles-list/', articles_list, name="articles_list"),
     path('delete-article/<id>/', delete_article, name="delete_article"),
     path('update-article/<id>/', update_article, name="update_article"),
-
 ]
 
 if settings.DEBUG:

@@ -23,48 +23,5 @@
     </div>
     <button type="submit" class="btn btn-success">Add Article</button>
   </form>
-  <hr>
-  <div class="mt-5">
-    <div class="mx-auto col-6">
-      <form>
-        <hr>
-        <div class="mt-5">
-          <div class="mx-auto col-6">
-            <form>
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Search Article</label>
-              <input name="search" type="text" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-primary">Search</button> 
-          </form>
-          </div>
-        </div>
-        <table class="table mt-5">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Title</th>
-              <th scope="col">Subtitle</th>
-              <th scope="col">Description</th>
-              <th scope="col">Images</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for article in articles %}
-            <tr>
-              <th scope="row">{{forloop.counter}}</th>
-              <td>{{article.title}}</td>
-              <td>{{article.subtitle}}</td>
-              <td>{{article.description}}</td>
-              <!-- <td>{{recipe.recipe_image}}</td> -->
-              <td><img src="/media/{{article.thumbnail}}" style="height : 100px"></td>
-              <td>
-                <a href="/delete-article/{{article.id}}" class="btn btn-danger mb-2">Delete</a>
-                <a href="/update-article/{{article.id}}" class="btn btn-success">Update</a>
-              </td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
 </div>
 {% endblock %}

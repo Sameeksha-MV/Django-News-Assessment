@@ -15,4 +15,4 @@ class Article(models.Model):
     author = models.ForeignKey(CustomUser, related_name="authored_articles", on_delete=models.CASCADE)
     status = models.CharField(max_length=20, default='Draft')  # Draft, Review, Published
 
-    
+     
