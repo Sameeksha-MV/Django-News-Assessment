@@ -23,7 +23,7 @@
   <nav class="navbar p-2 bg-black shadow-lg">
     <div class="topnav">
       <a class="navbar-brand" style="color: white;">Django</a>
-      <a class="navbar-brand" href="/" style="color: white;">Home</a>
+      <a class="navbar-brand" href="/home_articles/" style="color: white;">Home</a>
       <a class="navbar-brand" href="/about-us/" style="color: white;">About Us</a>
       <a class="navbar-brand" href="/contact-us/" style="color: white;">Contact Us</a>
     </div>
@@ -31,6 +31,16 @@
         {% if request.user.is_author %}
             <div>
               <a href="/articles-list/" class="btn btn-success ml-2">My Articles</a>
+            </div>
+        {% endif %}
+        {% if request.user.is_superuser %}
+        <div>
+          <a href="/view_users/" class="btn btn-success ml-2">View Users</a>
+        </div>
+        {% endif %}
+        {% if request.user.is_publisher %}
+            <div>
+              <a href="/show_published_articles/" class="btn btn-success ml-2">Published Articles</a>
             </div>
         {% endif %}
         {% if request.user.is_authenticated %}

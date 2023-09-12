@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block start %}
+<div class="container mt-5 card shadow-lg">
+  <h2>Articles</h2>
+  <table class="table table-striped" style="width:100%">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Author</th>
+        <th scope="col">Title</th>
+        <th scope="col">Subtitle</th>
+        <th scope="col">Description</th>
+        <th scope="col">Status</th>
+        <th scope="col">Images</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for published_articles in articles_published %}
+      <tr>
+        <th scope="row">{{ forloop.counter }}</th>
+        <td>{{ published_articles.author }}</td>
+        <td>{{ published_articles.title|truncatechars:30 }}</td>
+        <td>{{ published_articles.subtitle|truncatechars:30}}</td>
+        <td>{{ published_articles.description|truncatechars:50 }}</td><!-- Truncate to 100 characters -->
+        <td>{{ published_articles.status }}</td>
+        <td><img src="/media/{{ published_articles.thumbnail }}" style="height: 150px;" class="img-thumbnail"></td>
+        <td>
+          <a href="/view_article/{{ published_articles.id }}/" class="btn btn-dark mb-2">View</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="container mb-3 ">
+    <a href="/publish_articles/" class="btn btn-success ml-2">Review Pending Articles</a>
+  </div>
+</div>
+{% endblock %}

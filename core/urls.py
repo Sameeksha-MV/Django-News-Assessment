@@ -30,9 +30,17 @@ urlpatterns = [
     path('register/', register, name="register"),
     path('logout/', logout_page, name="logout_page"),
     path('add-article/', articles, name="articles"),
+    path('show_published_articles/', show_published_articles, name="show_published_articles"),
     path('articles-list/', articles_list, name="articles_list"),
     path('delete-article/<id>/', delete_article, name="delete_article"),
     path('update-article/<id>/', update_article, name="update_article"),
+    path('publish_articles/', publisher, name="publish_articles"),
+    path('view_article/<id>/', view_article_to_be_published, name="view_article_to_be_published"),
+    path('update_article_status/<article_id>/', update_article_status, name="update_article_status"),
+    path('delete_user/<id>/', delete_user, name="delete_user"),
+    path('view_users/', view_users, name="view_users"),
+    path('home_articles/', home_articles, name="home_articles"),
+
 ]
 
 if settings.DEBUG:

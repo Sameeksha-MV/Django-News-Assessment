@@ -37,7 +37,7 @@ def login_page(request):
       elif user.is_author:
         return redirect('/add-article/')
       elif user.is_publisher:
-        return redirect('/publisher/')
+        return redirect('/publish_articles/')
       else:
         messages.error(request, 'Something went wrong')
         return redirect('/login/')
@@ -65,6 +65,7 @@ def register(request):
       first_name = first_name,
       last_name = last_name,
       username = username,
+      email = email
     )
 
     user.set_password(password)
@@ -80,6 +81,11 @@ def register(request):
     return redirect('/register')
 
   return render(request, 'register.html')
+
+def view_users(request):
+  queryset= CustomUser.objects.all()
+  context = {'users': queryset}
+  return render(request, "view_user.html",context)
 
 @login_required
 def articles(request):
@@ -132,3 +138,40 @@ def delete_article(request, id):
   queryset = Article.objects.get(id = id)
   queryset.delete()
   return redirect('/add-article/')
+
+def show_published_articles(request):
+  queryset = Article.objects.filter(status='Published')
+  context = {'articles_published': queryset}
+  return render(request, 'published_articles.html', context)
+
+def publisher(request):
+  queryset = Article.objects.all()
+  context = {'publish_articles': queryset}
+  return render(request, 'publisher.html', context)
+
+def view_article_to_be_published(request, id):
+  queryset = Article.objects.get(id = id)
+  print(queryset)
+  context = {'view_article': queryset}
+  return render(request, 'view_articles.html', context)
+
+def update_article_status(request, article_id):
+  if request.method == 'POST':
+    status = request.POST.get('status')
+    article = Article.objects.get(pk=article_id)
+    article.status = status
+    article.save()
+
+    return redirect('publish_articles')
+
+  return render(request, 'view_articles.html')
+
+def delete_user(request, id):
+  queryset = CustomUser.objects.get(id = id)
+  queryset.delete()
+  return redirect('/view_users/')
+
+def home_articles(request):
+  queryset = Article.objects.filter(status = 'Published')
+  context = {'home_articles': queryset}
+  return render(request, 'home.html', context)
