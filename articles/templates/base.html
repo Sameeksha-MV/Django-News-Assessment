@@ -30,17 +30,20 @@
       <form class="d-flex" role="search">
         {% if request.user.is_author %}
             <div>
+              <a href="/add-article/" class="btn btn-success ml-2">Add Article </a>
               <a href="/articles-list/" class="btn btn-success ml-2">My Articles</a>
             </div>
         {% endif %}
         {% if request.user.is_superuser %}
         <div>
+          <a href="/register/" class="btn btn-success ml-2">Add User</a>
           <a href="/view_users/" class="btn btn-success ml-2">View Users</a>
         </div>
         {% endif %}
         {% if request.user.is_publisher %}
             <div>
               <a href="/show_published_articles/" class="btn btn-success ml-2">Published Articles</a>
+              <a href="/publish_articles/" class="btn btn-success ml-2"> Pending Review</a>
             </div>
         {% endif %}
         {% if request.user.is_authenticated %}
@@ -50,12 +53,7 @@
         {% endif %}        
         
       </form>
-    
-    
   </nav>
-  
-  
-  
   {% block start %}
   {% endblock %}
   <script>

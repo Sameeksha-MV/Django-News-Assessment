@@ -12,7 +12,6 @@
         <th scope="col">Description</th>
         <th scope="col">Status</th>
         <th scope="col">Images</th>
-        <th scope="col">Action</th>
       </tr>
     </thead>
     <tbody>
@@ -25,15 +24,10 @@
         <td>{{ published_articles.description|truncatechars:50 }}</td><!-- Truncate to 100 characters -->
         <td>{{ published_articles.status }}</td>
         <td><img src="/media/{{ published_articles.thumbnail }}" style="height: 150px;" class="img-thumbnail"></td>
-        <td>
-          <a href="/view_article/{{ published_articles.id }}/" class="btn btn-dark mb-2">View</a>
-        </td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
-  <div class="container mb-3 ">
-    <a href="/publish_articles/" class="btn btn-success ml-2">Review Pending Articles</a>
-  </div>
+  
 </div>
 {% endblock %}

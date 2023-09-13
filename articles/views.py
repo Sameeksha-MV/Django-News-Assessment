@@ -32,21 +32,22 @@ def login_page(request):
       return redirect('/login/')
     else:
       login(request, user)
-      if user.is_superuser:
-        return redirect('/register/')
-      elif user.is_author:
-        return redirect('/add-article/')
-      elif user.is_publisher:
-        return redirect('/publish_articles/')
-      else:
-        messages.error(request, 'Something went wrong')
-        return redirect('/login/')
+      # if user.is_superuser:
+      return redirect('/home_articles/')
+      # return redirect('/home_articles/')
+      # elif user.is_author:
+        # return redirect('/add-article/')
+      # elif user.is_publisher:
+      #   return redirect('/publish_articles/')
+      # else:
+        # messages.error(request, 'Something went wrong')
+        # return redirect('/login/')
 
   return render(request, 'login.html')  # Render the login page for both GET and POST requests
 
 def logout_page(request):
   logout(request)
-  return redirect('/login/')
+  return redirect('/home_articles/')
 
 def register(request):
   if request.method == "POST":
@@ -137,7 +138,7 @@ def update_article(request, id):
 def delete_article(request, id):
   queryset = Article.objects.get(id = id)
   queryset.delete()
-  return redirect('/add-article/')
+  return redirect('/articles-list/')
 
 def show_published_articles(request):
   queryset = Article.objects.filter(status='Published')
@@ -145,13 +146,13 @@ def show_published_articles(request):
   return render(request, 'published_articles.html', context)
 
 def publisher(request):
-  queryset = Article.objects.all()
+  # queryset = Article.objects.all()
+  queryset = Article.objects.filter(status = 'Draft')
   context = {'publish_articles': queryset}
   return render(request, 'publisher.html', context)
 
 def view_article_to_be_published(request, id):
   queryset = Article.objects.get(id = id)
-  print(queryset)
   context = {'view_article': queryset}
   return render(request, 'view_articles.html', context)
 
@@ -162,7 +163,7 @@ def update_article_status(request, article_id):
     article.status = status
     article.save()
 
-    return redirect('publish_articles')
+    return redirect('/publish_articles/')
 
   return render(request, 'view_articles.html')
 
