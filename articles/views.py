@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from .models import *
 from django.contrib.auth.decorators import login_required
 from articles.models import CustomUser
+from django.core.paginator import Paginator
 
 def home(request):
   articles = Article.objects.all()
@@ -85,7 +86,10 @@ def register(request):
 
 def view_users(request):
   queryset= CustomUser.objects.all()
-  context = {'users': queryset}
+  paginator = Paginator(queryset, 10)  # Set the number of articles per page (e.g., 10)
+  page_number = request.GET.get('page')
+  user = paginator.get_page(page_number)
+  context = {'users': user}
   return render(request, "view_user.html",context)
 
 @login_required
@@ -111,7 +115,10 @@ def articles(request):
 def articles_list(request):
     user = request.user
     queryset = Article.objects.filter(author=user)
-    context = {'articles': queryset}
+    paginator = Paginator(queryset, 5)  # Set the number of articles per page (e.g., 10)
+    page_number = request.GET.get('page')
+    articles = paginator.get_page(page_number)
+    context = {'articles': articles}
     return render(request, 'article_list.html', context)
 
 def update_article(request, id):
@@ -142,13 +149,19 @@ def delete_article(request, id):
 
 def show_published_articles(request):
   queryset = Article.objects.filter(status='Published')
-  context = {'articles_published': queryset}
+  paginator = Paginator(queryset, 5)  # Set the number of articles per page (e.g., 10)
+  page_number = request.GET.get('page')
+  articles = paginator.get_page(page_number)
+  context = {'articles_published': articles}
   return render(request, 'published_articles.html', context)
 
 def publisher(request):
   # queryset = Article.objects.all()
   queryset = Article.objects.filter(status = 'Draft')
-  context = {'publish_articles': queryset}
+  paginator = Paginator(queryset, 5)  # Set the number of articles per page (e.g., 10)
+  page_number = request.GET.get('page')
+  articles = paginator.get_page(page_number)
+  context = {'publish_articles': articles}
   return render(request, 'publisher.html', context)
 
 def view_article_to_be_published(request, id):
