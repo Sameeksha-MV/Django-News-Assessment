@@ -10,8 +10,7 @@
         <th scope="col">Last Name</th>
         <th scope="col">Username</th>
         <th scope="col">Email</th>
-        <th scope="col">Author</th>
-        <th scope="col">Publisher</th>
+        <th scope="col">Role</th>
         <th scope="col">Action</th>
       </tr>
     </thead>
@@ -23,8 +22,15 @@
         <td>{{ user.last_name }}</td>
         <td>{{ user.username }}</td>
         <td>{{ user.email }}</td>
-        <td>{{ user.is_author }}</td>
-        <td>{{ user.is_publisher }}</td>
+        <td>
+          {% if user.is_author %}
+            Author
+          {% elif user.is_publisher %}
+            Publisher
+          {% elif user.is_superuser %}
+            Admin
+          {% endif %}
+        </td>
         <td>
           <a href="/delete_user/{{ user.id }}" class="btn btn-danger mb-2">Delete</a>
         </td>
